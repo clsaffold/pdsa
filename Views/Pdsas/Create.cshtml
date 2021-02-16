@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+@model pdsatracker.Models.Pdsa
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Create New PDSA</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Shared" /> @Html.DisplayNameFor(model => model.Shared)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gap" class="control-label"></label>
+                    <input asp-for="Gap" class="form-control" />
+                    <span asp-validation-for="Gap" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Plan" class="control-label"></label>
+                    <input asp-for="Plan" class="form-control" />
+                    <span asp-validation-for="Plan" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Doing" class="control-label"></label>
+                    <input asp-for="Doing" class="form-control" />
+                    <span asp-validation-for="Doing" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Study" class="control-label"></label>
+                    <input asp-for="Study" class="form-control" />
+                    <span asp-validation-for="Study" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+    
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome to PDSA Tracker</h1>
+        <p>You must log-in or register to get started.</p>
+    </div>
+}
+
+
